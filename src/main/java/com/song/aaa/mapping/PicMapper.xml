@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.song.aaa.dao.PicMapper">
+  <resultMap id="BaseResultMap" type="com.song.aaa.po.Pic">
+    <id column="picno" jdbcType="INTEGER" property="picno" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="savepath" jdbcType="VARCHAR" property="savepath" />
+    <result column="fm" jdbcType="VARCHAR" property="fm" />
+    <result column="empid" jdbcType="INTEGER" property="empid" />
+    <result column="showname" jdbcType="VARCHAR" property="showname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    picno, pname, savepath, fm, empid, showname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pic
+    where picno = #{picno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pic
+    where picno = #{picno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.song.aaa.po.Pic">
+    insert into pic (picno, pname, savepath, 
+      fm, empid, showname
+      )
+    values (#{picno,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{savepath,jdbcType=VARCHAR}, 
+      #{fm,jdbcType=VARCHAR}, #{empid,jdbcType=INTEGER}, #{showname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.song.aaa.po.Pic">
+    insert into pic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="picno != null">
+        picno,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="savepath != null">
+        savepath,
+      </if>
+      <if test="fm != null">
+        fm,
+      </if>
+      <if test="empid != null">
+        empid,
+      </if>
+      <if test="showname != null">
+        showname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="picno != null">
+        #{picno,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="savepath != null">
+        #{savepath,jdbcType=VARCHAR},
+      </if>
+      <if test="fm != null">
+        #{fm,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="showname != null">
+        #{showname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.song.aaa.po.Pic">
+    update pic
+    <set>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="savepath != null">
+        savepath = #{savepath,jdbcType=VARCHAR},
+      </if>
+      <if test="fm != null">
+        fm = #{fm,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null">
+        empid = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="showname != null">
+        showname = #{showname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where picno = #{picno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.song.aaa.po.Pic">
+    update pic
+    set pname = #{pname,jdbcType=VARCHAR},
+      savepath = #{savepath,jdbcType=VARCHAR},
+      fm = #{fm,jdbcType=VARCHAR},
+      empid = #{empid,jdbcType=INTEGER},
+      showname = #{showname,jdbcType=VARCHAR}
+    where picno = #{picno,jdbcType=INTEGER}
+  </update>
+</mapper>
